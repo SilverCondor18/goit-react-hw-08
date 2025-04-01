@@ -16,12 +16,12 @@ import filtersReducer from './filtersSlice';
 const contactsPersistConfig = {
     key: "contacts_items",
     storage,
-    whitelist: ["contacts"]
+    whitelist: ["items"]
 };
 const filtersPersistConfig = {
     key: "name_filter",
     storage,
-    whitelist: ["filters"]
+    whitelist: ["name"]
 };
 
 const persistedContactsReducer = persistReducer(
