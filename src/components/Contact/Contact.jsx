@@ -1,6 +1,6 @@
 import { RiContactsFill, RiPhoneFill } from "react-icons/ri"
 import css from './Contact.module.css'
-import { deleteContact } from '../../redux/contactsSlice'
+import { deleteContact } from "../../redux/contactsOps"
 import { useDispatch } from "react-redux"
 export default function Contact({ item: { id, name, number } })
 {
