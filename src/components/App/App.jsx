@@ -4,12 +4,18 @@ import ContactList from '../ContactList/ContactList';
 import css from './App.module.css'
 import { ClipLoader } from 'react-spinners';
 import { selectIsLoading, selectError } from '../../redux/contactsSlice';
-import { useSelector } from 'react-redux';
+import { fetchContacts } from '../../redux/contactsOps';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import Error from '../ErrorMessage/ErrorMessage';
 
 function App() {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
+  const dispatch = useDispatch();
+  useEffect(() => {
+      dispatch(fetchContacts());
+  }, [dispatch]);
   return (
     <>
       <h1 className={css.header}>Phonebook</h1>
