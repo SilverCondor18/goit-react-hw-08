@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { mockFetchContacts, mockAddContact, mockDeleteContact } from "../mockapi";
+import { goitFetchContacts, goitAddContact, goitDeleteContact } from "../../goitapi";
 export const fetchContacts = createAsyncThunk("contacts/fetchContacts", async (_, thunkAPI) => {
     try {
-        const contacts = await mockFetchContacts();
+        const contacts = await goitFetchContacts();
         return contacts;
     }
     catch (error) {
@@ -12,7 +12,7 @@ export const fetchContacts = createAsyncThunk("contacts/fetchContacts", async (_
 
 export const addContact = createAsyncThunk("contacts/addContact", async (contact, thunkAPI) => {
     try {
-        const newContact = await mockAddContact(contact);
+        const newContact = await goitAddContact(contact);
         return newContact;
     }
     catch (error) {
@@ -22,7 +22,7 @@ export const addContact = createAsyncThunk("contacts/addContact", async (contact
 
 export const deleteContact = createAsyncThunk("contacts/deleteContact", async (id, thinkAPI) => {
     try {
-        const deletedContact = await mockDeleteContact(id);
+        const deletedContact = await goitDeleteContact(id);
         return deletedContact.id;
     }
     catch (error) {

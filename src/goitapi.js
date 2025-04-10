@@ -21,7 +21,7 @@ export const goitLogin = async user => {
 };
 
 export const goitLogout = async () => {
-    await axios.get("/users/logout");
+    await axios.post("/users/logout");
 };
 
 export const goitRefreshUser = async () => {

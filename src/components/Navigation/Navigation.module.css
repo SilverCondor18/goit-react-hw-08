@@ -1,0 +1,11 @@
+.navbar
+{
+    display: flex;
+    gap: 16px;
+}
+
+.link
+{
+    padding: 16px 0px;
+    font-weight: bold;
+}

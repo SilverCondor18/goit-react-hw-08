@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login, logout, refreshUser, signUp } from "./operations";
-import { clearAuthHeader, setAuthHeader } from "../../goitapi";
 
 
 const slice = createSlice({
@@ -21,8 +20,7 @@ const slice = createSlice({
                 const { user, token } = action.payload;
                 state.user = user;
                 state.token = token;
-                setAuthHeader(token);
-                isLoggedIn = true;
+                state.isLoggedIn = true;
             })
             .addCase(signUp.rejected, (state, action) => {
                 state.error = action.payload;
@@ -31,8 +29,7 @@ const slice = createSlice({
                 const { user, token } = action.payload;
                 state.user = user;
                 state.token = token;
-                setAuthHeader(token);
-                isLoggedIn = true;
+                state.isLoggedIn = true;
             })
             .addCase(login.rejected, (state, action) => {
                 state.error = action.payload;
@@ -41,7 +38,6 @@ const slice = createSlice({
                 state.user.name = null;
                 state.user.email = null;
                 state.token = null;
-                clearAuthHeader();
                 state.isLoggedIn = false;
             })
             .addCase(refreshUser.fulfilled, (state, action) => {

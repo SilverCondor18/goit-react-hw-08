@@ -1,29 +1,38 @@
-import ContactForm from '../ContactForm/ContactForm'
-import SearchBox from '../SearchBox/SearchBox'
-import ContactList from '../ContactList/ContactList';
-import css from './App.module.css'
-import { ClipLoader } from 'react-spinners';
-import { selectIsLoading, selectError } from '../../redux/contactsSlice';
-import { fetchContacts } from '../../redux/contactsOps';
+import { selectIsLoading, selectError } from '../../redux/contacts/contactsSlice';
+import { fetchContacts } from '../../redux/contacts/operations';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import Error from '../ErrorMessage/ErrorMessage';
+import { lazy, Suspense, useEffect } from 'react';
+import AppBar from "../AppBar/AppBar";
+import RestrictedRoute from '../RestrictedRoute/RestrictedRoute';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import { Routes, Route } from 'react-router';
+import { selectIsLoggedIn, selectIsRefreshing } from '../../redux/auth/selectors';
+import { refreshUser } from '../../redux/auth/operations';
+
+
+const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
+const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage"));
+const RegisterPage = lazy(() => import("../../pages/RegisterPage/RegisterPage"));
+const ContactPage = lazy(() => import("../../pages/ContactPage/ContactPage"));
 
 function App() {
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
   const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   useEffect(() => {
-      dispatch(fetchContacts());
+      dispatch(refreshUser());
   }, [dispatch]);
   return (
-    <>
-      <h1 className={css.header}>Phonebook</h1>
-      <Error error={error} />
-      <ContactForm />
-      <SearchBox />
-      <ContactList />
-      <ClipLoader loading={isLoading} className={css.loader} />
+    !isRefreshing && <>
+      <AppBar />
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<RestrictedRoute page={<LoginPage />} fallbackRoute="/contacts" />} />
+          <Route path="/register" element={<RestrictedRoute page={<RegisterPage />} fallbackRoute="/contacts" />} />
+          <Route path="/contacts" element={<PrivateRoute page={<ContactPage />} fallbackRoute="/login" />} />
+        </Routes>
+      </Suspense>
     </>
   )
 }
