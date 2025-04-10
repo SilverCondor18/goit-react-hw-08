@@ -3,7 +3,7 @@ import SearchBox from '../../components/SearchBox/SearchBox'
 import ContactList from '../../components/ContactList/ContactList';
 import css from './ContactPage.module.css'
 import { ClipLoader } from 'react-spinners';
-import { selectIsLoading, selectError } from '../../redux/contacts/contactsSlice';
+import { selectIsLoading, selectError } from '../../redux/contacts/selectors';
 import { fetchContacts } from '../../redux/contacts/operations';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
