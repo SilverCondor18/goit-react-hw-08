@@ -39,7 +39,12 @@ export const goitAddContact = async contact => {
     return response.data;
 };
 
+export const goitUpdateContact = async (contact, id) => {
+    const response = await axios.patch(`/contacts/${id}`, contact);
+    return response.data;
+};
+
 export const goitDeleteContact = async id => {
-    const response = await axios.delete(`/contacts/${id}`);
+    const response = await axios.delete(`/contacts/${contact.id}`);
     return response.data;
 };

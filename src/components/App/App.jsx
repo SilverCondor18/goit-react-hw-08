@@ -8,12 +8,14 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import { Routes, Route } from 'react-router';
 import { selectIsLoggedIn, selectIsRefreshing } from '../../redux/auth/selectors';
 import { refreshUser } from '../../redux/auth/operations';
+import { Toaster } from 'react-hot-toast';
 
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage"));
 const RegisterPage = lazy(() => import("../../pages/RegisterPage/RegisterPage"));
 const ContactPage = lazy(() => import("../../pages/ContactPage/ContactPage"));
+
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +26,7 @@ function App() {
   }, [dispatch]);
   return (
     !isRefreshing && <>
+      <Toaster position="top-right" reverseOrder={false} />
       <AppBar />
       <Suspense fallback={null}>
         <Routes>

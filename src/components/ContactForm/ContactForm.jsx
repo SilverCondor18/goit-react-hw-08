@@ -3,6 +3,7 @@ import css from './ContactForm.module.css';
 import * as Yup from 'yup';
 import { addContact } from '../../redux/contacts/operations';
 import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
 
 export default function ContactForm()
 {
@@ -11,7 +12,9 @@ export default function ContactForm()
         dispatch(addContact({
             name: name.trim(),
             number: number
-        }));
+        })).unwrap()
+            .then(() => toast.success(`Contact ${name.trim()} successfully added!`))
+            .catch(() => toast.error(`Something went wrong during adding contact ${name.trim()} - try refresh this page`));
         actions.resetForm();
     };
 
