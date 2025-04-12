@@ -41,9 +41,7 @@ export const refreshUser = createAsyncThunk("auth/refreshUser", async (_, thunkA
 
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     try {
-        const state = thunkAPI.getState();
         await goitLogout();
-        state.contacts.items = [];
         clearAuthHeader();
     }
     catch (error) {

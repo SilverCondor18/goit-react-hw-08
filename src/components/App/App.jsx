@@ -6,7 +6,7 @@ import AppBar from "../AppBar/AppBar";
 import RestrictedRoute from '../RestrictedRoute/RestrictedRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import { Routes, Route } from 'react-router';
-import { selectIsLoggedIn, selectIsRefreshing } from '../../redux/auth/selectors';
+import { selectToken, selectIsRefreshing } from '../../redux/auth/selectors';
 import { refreshUser } from '../../redux/auth/operations';
 import { Toaster } from 'react-hot-toast';
 
@@ -20,7 +20,7 @@ const ContactPage = lazy(() => import("../../pages/ContactPage/ContactPage"));
 function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const token = useSelector(selectToken);
   useEffect(() => {
       dispatch(refreshUser());
   }, [dispatch]);
