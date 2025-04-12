@@ -45,6 +45,6 @@ export const goitUpdateContact = async (contact, id) => {
 };
 
 export const goitDeleteContact = async id => {
-    const response = await axios.delete(`/contacts/${contact.id}`);
+    const response = await axios.delete(`/contacts/${id}`);
     return response.data;
 };

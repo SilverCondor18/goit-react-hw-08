@@ -30,7 +30,7 @@ export const updateContact = createAsyncThunk("contacts/updateContact", async (c
     }
 });
 
-export const deleteContact = createAsyncThunk("contacts/deleteContact", async (id, thinkAPI) => {
+export const deleteContact = createAsyncThunk("contacts/deleteContact", async (id, thunkAPI) => {
     try {
         const deletedContact = await goitDeleteContact(id);
         return deletedContact.id;
